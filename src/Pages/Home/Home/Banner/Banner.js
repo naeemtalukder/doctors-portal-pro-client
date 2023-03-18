@@ -1,6 +1,4 @@
 import React from "react";
-// import BannerBg from "../../../../../public/assets/images/appointment.png";
-// import chair from "../../../../../public/assets/images/chair.png";
 
 const Banner = () => {
   return (
