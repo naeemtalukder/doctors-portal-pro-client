@@ -1,18 +1,16 @@
-import React from 'react';
+import React from "react";
 
-const InfoCard = () => {
-    return (
-        <div className="card card-side bg-base-100 shadow-xl">
-  <figure><img src="/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure>
-  <div className="card-body">
-    <h2 className="card-title">New movie is released!</h2>
-    <p>Click the button to watch on Jetflix app.</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Watch</button>
+const InfoCard = ({card}) => {
+  const {name, description, icon, bgClass} = card;
+  return (
+    <div className={`card md:card-side p-6 text-white shadow-xl ${bgClass}`}>
+      <figure><img src={icon} alt="Movie"/></figure>
+      <div className="card-body">
+        <h2 className="card-title">{name}</h2>
+        <p>{description}</p>
+      </div>
     </div>
-  </div>
-</div>
-    );
+  );
 };
 
 export default InfoCard;
