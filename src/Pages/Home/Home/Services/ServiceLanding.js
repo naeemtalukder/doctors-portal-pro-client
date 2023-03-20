@@ -1,17 +1,18 @@
 import React from "react";
 import treatment from "../../../../accetes/images/treatment.png";
+import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
 
 const ServiceLanding = () => {
   return (
-    <div className="card lg:card-side mx-[217px] my-20">
+    <div className="card lg:card-side md:mx-[217px] md:my-20">
       <figure>
         <img
           src={treatment}
           alt="Album"
-          className="w-[458px] h-[576px]"
+          className="md:w-[458px] md:h-[576px]"
         />
       </figure>
-      <div className="card-body w-[497px] h-[397px]">
+      <div className="card-body md:w-[497px] md:h-[397px]">
         <h2 className="card-title md:text-3xl">Exceptional Dental Care, on Your Terms</h2>
         <p>
           It is a long established fact that a reader will be distracted by the
@@ -22,9 +23,7 @@ const ServiceLanding = () => {
           page
         </p>
         <div className="card-actions justify-start">
-          <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white uppercase">
-            Get Started
-          </button>
+          <PrimaryButton>Get Started</PrimaryButton>
         </div>
       </div>
     </div>
