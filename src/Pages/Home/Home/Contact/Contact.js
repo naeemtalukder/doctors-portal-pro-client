@@ -14,7 +14,7 @@ const Contact = () => {
           <div className="card-body">
             <div className="mb-10">
               <h4 className="text-xl text-secondary font-bold text-center">Testimonial</h4>
-              <h2 className="text-4xl text-white">What Our Patients Says</h2>
+              <h2 className="text-3xl text-white">What Our Patients Says</h2>
             </div>
             <div className="form-control">
               <input
@@ -31,7 +31,7 @@ const Contact = () => {
               />
             </div>
             <textarea className="textarea" placeholder="Your Massage"></textarea>
-            <div className="form-control mt-6">
+            <div className="text-center mt-6">
               <PrimaryButton>Submit</PrimaryButton>
             </div>
           </div>
