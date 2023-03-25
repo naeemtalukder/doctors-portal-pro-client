@@ -1,9 +1,11 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import BookingModal from '../BookingModal/BookingModal';
 import AppiontmentOption from './AppiontmentOption';
 
 const AvailableAppointment = ({selectDate, setSelectedDate}) => {
-    const [appintmentOptions, setAppintmentOptions] = useState([]);
+    const [appointmentOptions, setAppintmentOptions] = useState([]);
+    const [treatment, setTreatment] = useState(null);
 
     useEffect(() => {
         fetch('appiontmentOption.json')
@@ -15,10 +17,13 @@ const AvailableAppointment = ({selectDate, setSelectedDate}) => {
             <p className='text-center font-bold text-secondary'>Available Appointment On {format(selectDate, 'PP')} </p>
             <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  my-10'>
                 {
-                    appintmentOptions.map(option => <AppiontmentOption
-                    key={option._id} appointmentOption={option}></AppiontmentOption>)
+                    appointmentOptions.map(option => <AppiontmentOption
+                    key={option._id} appointmentOption={option} setTreatment={setTreatment} ></AppiontmentOption>)
                 }
             </div>
+            { treatment &&
+             <BookingModal treatment={treatment} selectDate={selectDate}></BookingModal>
+             }
         </section>
     );
 };
