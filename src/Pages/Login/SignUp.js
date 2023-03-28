@@ -2,20 +2,37 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const handleLogin = (data) => {
+  const handleSignUp = (data) => {
     console.log(data);
   };
   return (
     <div className="h-[650px] flex justify-center items-center">
       <div className="w-96 shadow-lg p-7">
-        <h2 className="text-xl text-center font-bold">Login</h2>
-        <form onSubmit={handleSubmit(handleLogin)}>
+        <h2 className="text-xl text-center font-bold">Sign Up</h2>
+        <form onSubmit={handleSubmit(handleSignUp)}>
+        <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              {...register("name", { required: "Type your Name",
+              pattern: /^[A-Za-z]+$/i })}
+              aria-invalid={errors.firstName ? "true" : "false"}
+              className="input input-bordered w-full max-w-xs"
+            />
+            {errors.name && (
+              <p className="text-red-600" role="alert">
+                {errors.name?.message}
+              </p>
+            )}{" "}
+          </div>
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">Email</span>
@@ -38,9 +55,11 @@ const Login = () => {
             </label>
             <input
               type="password"
+              placeholder="@ssgWds1"
               {...register("password", {
                 required: "Password is required",
-                minLength: {value: 6, message: 'password must be 6 characters or longer'}
+                minLength: {value: 6, message: 'password must be 6 characters or longer'},
+                pattern: {value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/, message: 'Password must be strong'}
               })}
               className="input input-bordered w-full max-w-xs"
             />
@@ -55,14 +74,14 @@ const Login = () => {
           </div>
           <input
             className="btn btn-accent w-full mb-1"
-            value="login"
+            value="sign up"
             type="submit"
           />
         </form>
         <p className="text-xs">
-          New to Doctors Portal pro?{" "}
-          <Link to="/signup" className="text-secondary">
-            Create new account
+          Already have an account?{" "}
+          <Link to="/login" className="text-secondary">
+            Please Login
           </Link>
         </p>
         <div className="divider">OR</div>
@@ -72,4 +91,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
