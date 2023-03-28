@@ -63,7 +63,7 @@ const BookingModal = ({ treatment, selectDate }) => {
             <input
               type="submit"
               value="submit"
-              className="btn btn-accent w-full"
+              className="btn btn-accent"
             ></input>
           </form>
         </div>
