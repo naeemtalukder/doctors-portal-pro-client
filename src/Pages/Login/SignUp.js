@@ -2,18 +2,16 @@ import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const SignUp = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const {register, formState: { errors }, handleSubmit} = useForm();
   const {createUser, updateUser, googleSignIn} = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState('');
+  const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
+
   const handleGoogleSignIn = (data) => {
     googleSignIn(googleProvider)
     .then(result => {
@@ -24,7 +22,9 @@ const SignUp = () => {
         displayName: data.name
       }
       updateUser(userInfo)
-      .then(() => {})
+      .then(() => {
+        navigate('/');
+      })
       .catch(err => console.log(err))
     })
     .catch(error => {
@@ -44,7 +44,9 @@ const SignUp = () => {
         displayName: data.name
       }
       updateUser(userInfo)
-      .then(() => {})
+      .then(() => {
+        navigate('/');
+      })
       .catch(err => console.log(err))
     })
     .catch(error => {
@@ -95,7 +97,7 @@ const SignUp = () => {
             </label>
             <input
               type="password"
-              placeholder="@ssgWdss1"
+              placeholder="@ssgWdss123"
               {...register("password", {
                 required: "Password is required",
                 minLength: {value: 6, message: 'password must be 6 characters or longer'},
