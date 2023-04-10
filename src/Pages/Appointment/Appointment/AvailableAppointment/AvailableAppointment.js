@@ -7,10 +7,11 @@ import { useQuery } from 'react-query';
 const AvailableAppointment = ({selectDate, setSelectedDate}) => {
     // const [appointmentOptions, setAppintmentOptions] = useState([]);
     const [treatment, setTreatment] = useState(null);
+    const date = format(selectDate, 'PP');
 
     const {data:appointmentOptions = []} = useQuery({
-        queryKey: ['appointmentOption'],
-        queryFn: () => fetch('http://localhost:5000/appointmentOption')
+        queryKey: ['appointmentOption', date],
+        queryFn: () => fetch(`http://localhost:5000/appointmentOption?date=${date}`)
         .then(res => res.json())
     })
 
