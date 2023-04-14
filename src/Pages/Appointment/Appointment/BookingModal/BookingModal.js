@@ -4,13 +4,14 @@ import { AuthContext } from "../../../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
 
 const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
-  const { name: treatmentName, slots } = treatment;
+  const { name: treatmentName, slots , _id} = treatment;
   const date = format(selectDate, "PP");
   const {user} = useContext(AuthContext);
 
   const handleBooking = event => {
     event.preventDefault();
     const form = event.target;
+    console.log(form);
     const slot = form.slot.value;
     const name = form.name.value;
     const email = form.email.value;
@@ -23,6 +24,7 @@ const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
         slot,
         email,
         phone,
+        id: _id,
     }
 
     // TODO: send data to the server
@@ -44,6 +46,10 @@ const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
       toast.success('Booking confirmed');
       refetch();
      }
+    //  else{
+    //   toast.error(data.message)
+    //  }
+
     })
 
   }
@@ -69,7 +75,7 @@ const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
               value={date}
               className="input w-full input-bordered"
             />
-            <select className="select select-bordered w-full">
+            <select name="slot" className="select select-bordered w-full">
               {slots.map((slot, i) => (
                 <option value={slot} key={i}>{slot}</option>
               ))}
