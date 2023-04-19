@@ -4,54 +4,13 @@ import { AuthContext } from "../../../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
 
 const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
-  const { name: treatmentName, slots , _id} = treatment;
+  const {_id, name, slots} = treatment;
   const date = format(selectDate, "PP");
-  const {user} = useContext(AuthContext);
 
   const handleBooking = event => {
     event.preventDefault();
-    const form = event.target;
-    console.log(form);
-    const slot = form.slot.value;
-    const name = form.name.value;
-    const email = form.email.value;
-    const phone = form.phone.value;
-    // [3, 4, 5].map((value, i) => console.log(value))
-    const booking = {
-        appointmentDate: date,
-        treatment: treatmentName,
-        patient: name,
-        slot,
-        email,
-        phone,
-        id: _id,
-    }
-
-    // TODO: send data to the server
-    // and once data is saved then close the modal 
-    // and display success toast
-
-    fetch('http://localhost:5000/bookings', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(booking)
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-     if(data.acknowledged){
-      setTreatment(null);
-      toast.success('Booking confirmed');
-      refetch();
-     }
-    //  else{
-    //   toast.error(data.message)
-    //  }
-
-    })
-
+    const slot = event.terget.slot.value;
+    console.log(_id, name , slot)
   }
   
   return (
@@ -65,7 +24,7 @@ const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">{treatmentName}</h3>
+          <h3 className="text-lg font-bold"></h3>
           <form 
           onSubmit={handleBooking}
           className="grid grid-cols-1 gap-3 mt-6">
@@ -76,21 +35,19 @@ const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
               className="input w-full input-bordered"
             />
             <select name="slot" className="select select-bordered w-full">
-              {slots.map((slot, i) => (
-                <option value={slot} key={i}>{slot}</option>
-              ))}
+            
             </select>
             <input
               name="name"
               type="text"
-              defaultValue={user?.displayName} disabled
+               disabled
               placeholder="Your Name"
               className="input w-full input-bordered"
             />
             <input
               name="email"
               type="email"
-              defaultValue={user?.email} disabled
+             disabled
               placeholder="Email Address"
               className="input w-full input-bordered"
             />
