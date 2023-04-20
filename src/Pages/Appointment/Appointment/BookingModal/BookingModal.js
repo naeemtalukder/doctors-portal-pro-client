@@ -3,16 +3,16 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
 
-const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
-  const {_id, name, slots} = treatment;
+const BookingModal = ({ treatment, setTreatment, selectDate, refetch }) => {
+  const { _id, name, slots } = treatment;
   const date = format(selectDate, "PP");
 
-  const handleBooking = event => {
+  const handleBooking = (event) => {
     event.preventDefault();
     const slot = event.terget.slot.value;
-    console.log(_id, name , slot)
-  }
-  
+    console.log(_id, name, slot);
+  };
+
   return (
     <>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -25,44 +25,51 @@ const BookingModal = ({ treatment, setTreatment, selectDate ,refetch}) => {
             ✕
           </label>
           <h3 className="text-lg font-bold"></h3>
-          <form 
-          onSubmit={handleBooking}
-          className="grid grid-cols-1 gap-3 mt-6">
+          <form
+            onSubmit={handleBooking}
+            className="grid grid-cols-1 gap-3 justify-items-center mt-2"
+          >
             <input
               type="text"
               disabled
-              value={date}
-              className="input w-full input-bordered"
+              value={format(date, "PP")}
+              className="input input-bordered w-full max-w-xs"
             />
-            <select name="slot" className="select select-bordered w-full">
-            
+            <select
+              name="slot"
+              className="select select-bordered w-full max-w-xs"
+            >
+              {slots.map((slot, index) => (
+                <option key={index} value={slot}>
+                  {slot}
+                </option>
+              ))}
             </select>
             <input
+              type="text"
               name="name"
-              type="text"
-               disabled
-              placeholder="Your Name"
-              className="input w-full input-bordered"
+              disabled
+              value={user?.displayName || ""}
+              className="input input-bordered w-full max-w-xs"
             />
             <input
-              name="email"
               type="email"
-             disabled
-              placeholder="Email Address"
-              className="input w-full input-bordered"
+              name="email"
+              disabled
+              value={user?.email || ""}
+              className="input input-bordered w-full max-w-xs"
             />
             <input
-              name="phone"
               type="text"
+              name="phone"
               placeholder="Phone Number"
-              className="input w-full input-bordered"
+              className="input input-bordered w-full max-w-xs"
             />
-            <br />
             <input
               type="submit"
-              value="submit"
-              className="btn btn-accent"
-            ></input>
+              value="Submit"
+              className="btn btn-secondary w-full max-w-xs"
+            />
           </form>
         </div>
       </div>
